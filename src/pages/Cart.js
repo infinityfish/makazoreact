@@ -1,4 +1,5 @@
 import React from 'react';
+import Cookies from 'js-cookie';
 import { CartContext } from '../CartContext';
 
 function Cart() {
@@ -19,6 +20,7 @@ function Cart() {
     } else {
       setCartItems([...cartItems, { ...product, qty: 1 }]);
     }
+    Cookies.set('cartItems', JSON.stringify(cartItems));
   };
   const onRemove = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);

@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 
 export const CartContext = React.createContext();
 
 export const CartProvider = (props) => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(
+    Cookies.get('cartItems') ? JSON.parse(Cookies.get('cartItems')) : []
+  ); //initial state
   const [loggedIn, setLoggedIn] = useState([]);
+
+  React.useEffect(() => {
+    Cookies.set('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
 
   return (
     <CartContext.Provider

@@ -1,9 +1,15 @@
 import React from 'react';
+import Cookies from 'js-cookie';
 import { CartContext } from '../CartContext';
 
 export default function Product(props) {
   const [cartItems, setCartItems] = React.useContext(CartContext);
   const { product } = props;
+
+  React.useEffect(() => {
+    Cookies.set('cartItem', JSON.stringify(cartItems));
+  }, [cartItems]);
+
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist) {
@@ -16,6 +22,7 @@ export default function Product(props) {
       setCartItems([...cartItems, { ...product, qty: 1 }]);
       // setCartItems([...cartItems, ...product]); //when dealing with unique products like NFTs
     }
+    Cookies.set('cartItems', JSON.stringify(cartItems));
   };
   return (
     <div>
