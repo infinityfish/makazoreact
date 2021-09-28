@@ -10,7 +10,7 @@ export const CartProvider = (props) => {
   const [loggedIn, setLoggedIn] = useState([]);
 
   React.useEffect(() => {
-    Cookies.set('cartItems', JSON.stringify(cartItems));
+    Cookies.set('cartItems', JSON.stringify(cartItems), { expires: 30 });
   }, [cartItems]);
 
   return (

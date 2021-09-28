@@ -20,7 +20,7 @@ function Cart() {
     } else {
       setCartItems([...cartItems, { ...product, qty: 1 }]);
     }
-    Cookies.set('cartItems', JSON.stringify(cartItems));
+    Cookies.set('cartItems', JSON.stringify(cartItems), { expires: 30 });
   };
   const onRemove = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -33,6 +33,7 @@ function Cart() {
         )
       );
     }
+    Cookies.set('cartItems', JSON.stringify(cartItems), { expires: 30 });
   };
 
   return (
